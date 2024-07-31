@@ -64,5 +64,35 @@ fig4 = plt.figure(4)
 plt.scatter(outcome_test, prediction, alpha=0.4)
 fig4.show()
 
+# Another Single Feature Linear Regression model
+# Feature chosen: Double Faults
+# Outcome chosen: Wins
+# Split: 80% Train 20% Test
+features = Tennis_dataset[["DoubleFaults"]]
+outcomes = Tennis_dataset[["Wins"]]
+feature_train, feature_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+model = LinearRegression()
+model.fit(feature_train, outcome_train)
+model.score(feature_test, outcome_test)
+prediction = model.predict(feature_test)
+fig5 = plt.figure(5)
+plt.scatter(outcome_test, prediction, alpha=0.4)
+fig5.show()
+
+# Create Two Feature Linear Regression model
+# Features chosen: Aces, Double Faults
+# Outcome chosen: Wins
+# Split: 80% Train 20% Test
+features = Tennis_dataset[["Aces", "DoubleFaults"]]
+outcomes = Tennis_dataset[["Wins"]]
+feature_train, feature_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+model = LinearRegression()
+model.fit(feature_train, outcome_train)
+model.score(feature_test, outcome_test)
+prediciton = model.predict(feature_test)
+fig6 = plt.figure(6)
+plt.scatter(outcome_test, prediction, alpha=0.4)
+fig6.show()
+
 # Below line keeps figure windows "alive" until closed
 input()

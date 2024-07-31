@@ -25,27 +25,30 @@ print(Tennis_dataset.info())
 wins = Tennis_dataset["Wins"]
 
 aces = Tennis_dataset["Aces"]
-fig1 = plt.figure(1)
 plt.scatter(aces,wins)
+plt.title("# Aces vs. # Wins")
 plt.xlabel("# Aces")
 plt.ylabel("# Wins")
-fig1.show()
+plt.show()
+plt.clf()
 # Positive correlation
 
 dbl_faults = Tennis_dataset["DoubleFaults"]
-fig2 = plt.figure(2)
 plt.scatter(dbl_faults, wins)
+plt.title("# Double Faults vs. # Wins")
 plt.xlabel("# Double Faults")
 plt.ylabel("# Wins")
-fig2.show()
+plt.show()
+plt.clf()
 # Positive correlation
 
 first_serve = Tennis_dataset["FirstServe"]
-fig3 = plt.figure(3)
 plt.scatter(first_serve, wins)
+plt.title("% First-Serve Attempts Made vs. # Wins")
 plt.xlabel("% of First-Serve Attempts Made")
 plt.ylabel("# of Wins")
-fig3.show()
+plt.show()
+plt.clf()
 # Normal distribution?
 
 
@@ -55,14 +58,21 @@ fig3.show()
 # Split: 80% Train 20% Test
 features = Tennis_dataset[["Aces"]]
 outcomes = Tennis_dataset[["Wins"]]
-feature_train, feature_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+# Split the data into training and test sets
+features_train, features_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+# Instantiate the model
 model = LinearRegression()
-model.fit(feature_train, outcome_train)
-model.score(feature_test, outcome_test)
-prediction = model.predict(feature_test)
-fig4 = plt.figure(4)
-plt.scatter(outcome_test, prediction, alpha=0.4)
-fig4.show()
+# Train the model using training sets
+model.fit(features_train, outcome_train)
+# Make outcome predictions based on the test input
+outcome_predictions = model.predict(features_test)
+# Find the R^2 score of the test data
+model.score(features_test, outcome_test)
+# Plot the test data scatter plot
+plt.scatter(outcome_test, outcome_predictions, alpha=0.4)
+plt.title("Predicted Wins vs. Actual Wins - 1 Feature (Aces)")
+plt.show()
+plt.clf()
 
 # Another Single Feature Linear Regression model
 # Feature chosen: Double Faults
@@ -70,14 +80,21 @@ fig4.show()
 # Split: 80% Train 20% Test
 features = Tennis_dataset[["DoubleFaults"]]
 outcomes = Tennis_dataset[["Wins"]]
-feature_train, feature_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+# Split the data into training and test sets
+features_train, features_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+# Instantiate the model
 model = LinearRegression()
-model.fit(feature_train, outcome_train)
-model.score(feature_test, outcome_test)
-prediction = model.predict(feature_test)
-fig5 = plt.figure(5)
-plt.scatter(outcome_test, prediction, alpha=0.4)
-fig5.show()
+# Train the model using training sets
+model.fit(features_train, outcome_train)
+# Make outcome predictions based on the test input
+outcome_predictions = model.predict(features_test)
+# Find the R^2 score of the test data
+model.score(features_test, outcome_test)
+# Plot the test data scatter plot
+plt.scatter(outcome_test, outcome_predictions, alpha=0.4)
+plt.title("Predicted Wins vs. Actual Wins - 1 Feature (Double Faults)")
+plt.show()
+plt.clf()
 
 # Create Two Feature Linear Regression model
 # Features chosen: Aces, Double Faults
@@ -85,14 +102,21 @@ fig5.show()
 # Split: 80% Train 20% Test
 features = Tennis_dataset[["Aces", "DoubleFaults"]]
 outcomes = Tennis_dataset[["Wins"]]
-feature_train, feature_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+# Split the data into training and test sets
+features_train, features_test, outcome_train, outcome_test = train_test_split(features, outcomes, train_size=0.8)
+# Instantiate the model
 model = LinearRegression()
-model.fit(feature_train, outcome_train)
-model.score(feature_test, outcome_test)
-prediciton = model.predict(feature_test)
-fig6 = plt.figure(6)
-plt.scatter(outcome_test, prediction, alpha=0.4)
-fig6.show()
+# Train the model using training sets
+model.fit(features_train, outcome_train)
+# Make outcome predictions based on the test input
+outcome_predictions = model.predict(features_test)
+# Find the R^2 score of the test data
+model.score(features_test, outcome_test)
+# Plot the test data scatter plot
+plt.scatter(outcome_test, outcome_predictions, alpha=0.4)
+plt.title("Predicted Wins vs. Actual Wins - 2 Features (Aces and Double Faults)")
+plt.show()
+plt.clf()
 
 # Below line keeps figure windows "alive" until closed
-input()
+#input()

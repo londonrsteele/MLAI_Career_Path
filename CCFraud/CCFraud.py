@@ -52,3 +52,19 @@ Transactions_dataset["isMovement"][Transactions_dataset["type"].isin(["CASH_OUT"
 # Create a accountDiff column, where 
 # absolute diff b/t oldbalanceDest - oldbalanceOrg
 Transactions_dataset["accountDiff"] = np.abs(Transactions_dataset["oldbalanceDest"] - Transactions_dataset["oldbalanceOrg"])
+
+# Create Features and Labels for Model
+features = Transactions_dataset[["amount", "isPayment", "isMovement", "accountDiff"]]
+label = Transactions_dataset[["isFraud"]]
+
+# Split data into training and test
+features_train, features_test, outcome_train, outcome_test = train_test_split(features, label, test_size=0.3)
+
+# Codecademy note: Because sklearn's Logisitc Regression implementation
+# uses Regularization, we need to scale our feature data.
+
+# Create a scaler, fit it on the training set, and transform the test set
+std_scaler = StandardScaler()
+features_train = std_scaler.fit_transform(features_train)
+features_test = std_scaler.transform(features_test)
+

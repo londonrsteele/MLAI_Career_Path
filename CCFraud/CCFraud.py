@@ -93,3 +93,22 @@ print(LR_model.coef_)
 # The feature with the largest absolute magnitude (and thus importance) was
 # column 0, "amount", followed by column 1, "isPayment". The least important
 # feature was column 2, "isMovement".
+
+# Predict with the model!
+# New transaction data:
+transaction1 = np.array([123456.78, 0.0, 1.0, 54670.1])
+transaction2 = np.array([98765.43, 1.0, 0.0, 8524.75])
+transaction3 = np.array([543678.31, 1.0, 0.0, 510025.5])
+
+sample_transactions = np.stack((transaction1, transaction2, transaction3))
+
+# Scale transactions
+sample_transactions = std_scaler.transform(sample_transactions)
+
+# Predict fraud on the new transactions
+print(LR_model.predict(sample_transactions))
+
+# Show probabilites on new transactions
+print(LR_model.predict_proba(sample_transactions))
+
+# None of the transactions were flagged for fraud! With > 65% accuracy!

@@ -68,3 +68,28 @@ std_scaler = StandardScaler()
 features_train = std_scaler.fit_transform(features_train)
 features_test = std_scaler.transform(features_test)
 
+# Create a Logistic Regression model with sklearn
+LR_model = LogisticRegression()
+
+# Fit the model onto the training data - this finds the best coefficients
+# for our features so the model can more accurately predict our outcome (label)
+LR_model.fit(features_train, outcome_train)
+
+# Score the trainig data - this will process the training data through the
+# trained model and will predict which transactions are fraud. The score
+# returned is the % of correct classifications (the accuracy)
+print(LR_model.score(features_train, outcome_train))
+
+# Score the test data - the accuracy this time will reflect the success of
+# the model!
+print(LR_model.score(features_test, outcome_test))
+
+# Our model was 85% accurate!
+
+# Print the model coefficients to see how important each feature column was
+# for prediction.
+print(LR_model.coef_)
+
+# The feature with the largest absolute magnitude (and thus importance) was
+# column 0, "amount", followed by column 1, "isPayment". The least important
+# feature was column 2, "isMovement".

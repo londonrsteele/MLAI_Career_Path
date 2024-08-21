@@ -1,4 +1,4 @@
-# Filename : TennisAce.py
+# Filename : Handwriting.py
 # Author   : LR Steele
 # Info     : Coding project/objective for "Unupervised Learning Algorithms I"
 #          : section of Machine Learning Fundamentals course in the 
